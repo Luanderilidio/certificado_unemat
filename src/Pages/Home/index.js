@@ -142,7 +142,10 @@ export default function Home() {
         <h1 className="font-bold text-xl font-atala">
           Create and share certificates dynamically using this tool
         </h1>
-        <Container maxWidth="lg" className="mt-5 p-3 rounded-lg border-solid border-green-700 border-4">
+        <Container
+          maxWidth="lg"
+          className="mt-5 p-3 rounded-lg border-solid border-green-700 border-4"
+        >
           {/* <div className="mt-5 w-11/12 h-fit p-3 rounded-lg border-solid border-green-700 border-4 "> */}
           <div className="flex flew-row justify-between items-center font-medium">
             <div className="flex items-center">
@@ -211,7 +214,7 @@ export default function Home() {
                 </button>
               </Tooltip>
             </div>
-            <div className="flex">
+            {/* <div className="flex">
               <Tooltip arrow title="compartilhar certificado nas redes sociais">
                 <button className="transition ease-in-out rounded-md flex border-solid border-2  text-purple-500 border-purple-500 hover:border-purple-700 active:border-purple-400 flex-g p-2 items-center mr-2">
                   <BiShareAlt className="mr-2" />
@@ -224,7 +227,7 @@ export default function Home() {
                   <p className="">Download</p>
                 </button>
               </Tooltip>
-            </div>
+            </div> */}
           </div>
           <div className="p-2">
             <Certificado
@@ -245,14 +248,32 @@ export default function Home() {
             />
           </div>
         </Container>
-        <div className="w-80 mt-10 flex flew-row justify-evenly font-medium">
-          <p className="transition ease-in-out hover:-translate-y-0.1 hover:text-yellow-500">
-            about
-          </p>
-          <p className="hover:text-yellow-500">source</p>
-          <p className="hover:text-yellow-500">terms</p>
-          <p className="hover:text-yellow-500">privacy</p>
-          <p className="hover:text-yellow-500">offsets</p>
+        <div className="w-80 mt-10 flex flew-row justify-evenly font-medium mb-10 ">
+          <button>
+            <p className="transition ease-in-out hover:-translate-y-0.1 hover:text-yellow-500">
+              about
+            </p>
+          </button>
+          <button>
+            <p className="transition ease-in-out hover:-translate-y-0.1 hover:text-yellow-500">
+              source
+            </p>
+          </button>
+          <button>
+            <p className="transition ease-in-out hover:-translate-y-0.1 hover:text-yellow-500">
+              terms
+            </p>
+          </button>
+          <button>
+            <p className="transition ease-in-out hover:-translate-y-0.1 hover:text-yellow-500">
+              privacy
+            </p>
+          </button>
+          <button>
+            <p className="transition ease-in-out hover:-translate-y-0.1 hover:text-yellow-500">
+              offsets
+            </p>
+          </button>
         </div>
       </div>
       <Dialog
