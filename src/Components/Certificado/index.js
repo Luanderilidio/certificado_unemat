@@ -15,7 +15,7 @@ import html2canvas from "html2canvas";
 import imageIcons from "../../assets/imageicons.png";
 import { BiShareAlt } from "react-icons/bi";
 import { MdCloudDownload } from "react-icons/md";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 const styleGrid = {
   display: "flex",
@@ -39,9 +39,12 @@ export default function Certificado(props) {
     fakeLink.click();
     document.body.removeChild(fakeLink);
     fakeLink.remove();
+    setState(false);
   };
 
   const exportRef = useRef();
+
+  const [state, setState] = useState(false);
 
   return (
     <>
@@ -51,20 +54,31 @@ export default function Certificado(props) {
         id="elementId"
         sx={{
           padding: "20px 0",
-          position: "relative",
+          // position: "relative",
           borderRadius: "4px",
           background:
             "linear-gradient(0deg, rgba(10,148,8,1) 16%, rgba(194,194,194,1) 64%, rgba(37,55,240,1) 94%)",
         }}
         container
       >
+        <Typography
+          fontFamily="Mr Dafoe"
+          color="#0833CD"
+          sx={{ textShadow: "2px 2px #ffffff" }}
+          fontSize="5rem"
+          position="absolute"
+          top={340}
+          left={155}
+        >
+          Certificado
+        </Typography>
         <Grid md={2} lg={2} xl={2} sx={styleGrid} item>
           <Stack justifyContent="center" alignItems="center">
             <Box component="img" src={Logo1} sx={{ width: 80 }} />
           </Stack>
         </Grid>
         <Grid md={8} lg={8} xl={8} sx={styleGrid} item>
-          <Typography fontFamily="Anton" fontSize="2.3rem">
+          <Typography fontFamily="Anton" fontSize="2.6rem">
             Universidade do Estado de Mato Grosso
           </Typography>
         </Grid>
@@ -72,23 +86,8 @@ export default function Certificado(props) {
           <Box component="img" src={Logo2} sx={{ width: 80 }} />
         </Grid>
         <Grid md={0.5} lg={0.5} xl={0.5} item />
-        <Grid
-          sx={{ mt: 8, position: "relative", zIndex: 2 }}
-          md={11}
-          lg={11}
-          xl={11}
-          item
-        >
-          <Typography
-            fontFamily="Mr Dafoe"
-            color="#0833CD"
-            sx={{ textShadow: "2px 2px #ffffff" }}
-            fontSize="5rem"
-            position="absolute"
-            top={-120}
-          >
-            Certificado
-          </Typography>
+
+        <Grid sx={{ mt: 8 }} md={11} lg={11} xl={11} item>
           <Stack
             sx={{
               borderRadius: "1px 140px",
@@ -315,19 +314,18 @@ export default function Certificado(props) {
           </Stack>
         </Grid>
         <Grid md={0.5} lg={0.5} xl={0.5} item />
-        {/* <Box
-        sx={{
-          position: "absolute",
-          border: "1px solid red",
-          width: 800,
-          zIndex: 1,
-          right: -150,
-          bottom: -80,
-          opacity: 0.3,
-        }}
-        component="img"
-        src={imageIcons}
-      /> */}
+        <Box
+          sx={{
+            position: "absolute",
+            width: 300,
+            zIndex: 0,
+            right: 110,
+            bottom: -330,
+            opacity: 0.1,
+          }}
+          component="img"
+          src={imageIcons}
+        />
       </Grid>
       {/* </Container> */}
 
@@ -340,7 +338,10 @@ export default function Certificado(props) {
         </Tooltip>
         <Tooltip arrow title="fazer download do certificado">
           <button
-            onClick={() => exportAsImage(exportRef.current, "test")}
+            onClick={() => {
+              setState(true);
+              exportAsImage(exportRef.current, "test");
+            }}
             className="transition rounded-md flex border-solid active:border-pink-400 border-2 text-pink-500 border-pink-500 hover:border-pink-700 flex-g p-2 items-center "
           >
             <MdCloudDownload className="mr-2" />
