@@ -385,7 +385,7 @@ export default function Home() {
         <DialogTitle>Descrição</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Descreva o objetivo do certificado aqui
+            Descreva o objetivo do certificado aqui.
           </DialogContentText>
           <TextField
             // sx={styledInput}
