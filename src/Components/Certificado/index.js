@@ -1,11 +1,4 @@
-import {
-  Box,
-  Container,
-  Divider,
-  Grid,
-  Tooltip,
-  Typography,
-} from "@mui/material";
+import { Box, Divider, Grid, Tooltip, Typography } from "@mui/material";
 import { Stack } from "@mui/system";
 import Logo1 from "../../assets/logo1.png";
 import Logo2 from "../../assets/logo2.png";
@@ -15,7 +8,7 @@ import html2canvas from "html2canvas";
 import imageIcons from "../../assets/imageicons.png";
 import { BiShareAlt } from "react-icons/bi";
 import { MdCloudDownload } from "react-icons/md";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 
 const styleGrid = {
   display: "flex",
@@ -39,12 +32,11 @@ export default function Certificado(props) {
     fakeLink.click();
     document.body.removeChild(fakeLink);
     fakeLink.remove();
-    setState(false);
   };
 
   const exportRef = useRef();
 
-  const [state, setState] = useState(false);
+  // const [state, setState] = useState(false);
 
   return (
     <>
@@ -339,7 +331,6 @@ export default function Certificado(props) {
         <Tooltip arrow title="fazer download do certificado">
           <button
             onClick={() => {
-              setState(true);
               exportAsImage(exportRef.current, "test");
             }}
             className="transition rounded-md flex border-solid active:border-pink-400 border-2 text-pink-500 border-pink-500 hover:border-pink-700 flex-g p-2 items-center "
