@@ -1,5 +1,5 @@
-import { BiShareAlt, BiMapPin } from "react-icons/bi";
-import { MdCloudDownload, MdOutlineBook, MdTextFields } from "react-icons/md";
+import { BiMapPin } from "react-icons/bi";
+import { MdOutlineBook, MdTextFields } from "react-icons/md";
 import { HiOutlineUserGroup } from "react-icons/hi";
 import Header from "../../Components/header";
 import {
@@ -318,7 +318,7 @@ export default function Home() {
               />
             </Stack>
           </DialogContent>
-          {qtdAssinatura != 1 ? (
+          {qtdAssinatura !== 1 ? (
             <DialogContent>
               <DialogContentText>
                 <div className="p-10 flex flex-col align-center justify-center text-gray-500">
