@@ -53,7 +53,7 @@ export default function Certificado(props) {
         }}
         container
       >
-        <Typography
+        {/* <Typography
           fontFamily="Mr Dafoe"
           color="#0833CD"
           sx={{ textShadow: "2px 2px #ffffff" }}
@@ -63,7 +63,7 @@ export default function Certificado(props) {
           left={155}
         >
           Certificado
-        </Typography>
+        </Typography> */}
         <Grid md={2} lg={2} xl={2} sx={styleGrid} item>
           <Stack justifyContent="center" alignItems="center">
             <Box component="img" src={Logo1} sx={{ width: 80 }} />
