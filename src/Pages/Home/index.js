@@ -150,7 +150,7 @@ export default function Home() {
           Create and share certificates dynamically using this tool
         </h1>
         <Container
-          maxWidth="sm"
+          maxWidth="lg"
           className="mt-5 p-3 rounded-lg border-solid border-green-700 border-4"
         >
           <Grid container spacing={1}>
