@@ -1,14 +1,31 @@
-import { Box, Divider, Grid, Tooltip, Typography } from "@mui/material";
+import {
+  Box,
+  CircularProgress,
+  Dialog,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Divider,
+  Grid,
+  Slide,
+  Tooltip,
+  Typography,
+} from "@mui/material";
 import { Stack } from "@mui/system";
 import Logo1 from "../../assets/logo1.png";
 import Logo2 from "../../assets/logo2.png";
 import Logo3 from "../../assets/unemat.png";
-import html2canvas from "html2canvas";
-
-import imageIcons from "../../assets/imageicons.png";
-import { BiShareAlt } from "react-icons/bi";
+import { useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import * as htmlToImage from "html-to-image";
+import Logo4 from "../../assets/imageicons.png";
+import { BiError, BiShareAlt } from "react-icons/bi";
 import { MdCloudDownload } from "react-icons/md";
-import { useRef } from "react";
+import React, { useRef, useState } from "react";
+import "@fontsource/roboto";
+import "@fontsource/anton";
+import "@fontsource/tinos";
+import "@fontsource/mr-dafoe";
 
 const styleGrid = {
   display: "flex",
@@ -16,75 +33,116 @@ const styleGrid = {
   justifyContent: "center",
 };
 
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
+
 export default function Certificado(props) {
-  const exportAsImage = async (element, imageFileName) => {
-    const canvas = await html2canvas(element);
-    const image = canvas.toDataURL("image/png", 1.0);
-    downloadImage(image, imageFileName);
+  const domEl = useRef(null);
+  const [loading, setLoading] = useState(false);
+
+  const downloadImage = async () => {
+    try {
+      setLoading(true);
+      const dataURL = await htmlToImage.toPng(domEl.current);
+      const link = document.createElement("a");
+      link.style = "display:none;";
+      link.download = "Certificado";
+      link.href = dataURL;
+      link.click();
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const downloadImage = (blob, fileName) => {
-    const fakeLink = window.document.createElement("a");
-    fakeLink.style = "display:none;";
-    fakeLink.download = fileName;
-    fakeLink.href = blob;
-    document.body.appendChild(fakeLink);
-    fakeLink.click();
-    document.body.removeChild(fakeLink);
-    fakeLink.remove();
-  };
-
-  const exportRef = useRef();
-
-  // const [state, setState] = useState(false);
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.down("md"));
 
   return (
     <>
-      {/* <Container sx={{ border: "1px solid red" }} maxWidth="xl"> */}
+      <Dialog
+        open={matches}
+        TransitionComponent={Transition}
+        keepMounted
+        onClose={matches}
+      >
+        <DialogTitle sx={{ textAlign: "center" }}>ATENCÃO</DialogTitle>
+        <DialogContent>
+          <DialogContentText
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <BiError size={120} color="red" />
+            Essa ferramenta funciona melhor em dispositivos desktop pois permite
+            melhor visualização do certificado para seu download. Considere
+            acesar a ferramenta em outro dipositivo!
+          </DialogContentText>
+        </DialogContent>
+      </Dialog>
       <Grid
-        ref={exportRef}
-        id="elementId"
+        id="domEl"
+        ref={domEl}
         sx={{
           padding: "20px 0",
-          // position: "relative",
+          position: "relative",
           borderRadius: "4px",
           background:
             "linear-gradient(0deg, rgba(10,148,8,1) 16%, rgba(194,194,194,1) 64%, rgba(37,55,240,1) 94%)",
         }}
         container
       >
-        {/* <Typography
-          fontFamily="Mr Dafoe"
-          color="#0833CD"
-          sx={{ textShadow: "2px 2px #ffffff" }}
-          fontSize="5rem"
-          position="absolute"
-          top={340}
-          left={155}
-        >
-          Certificado
-        </Typography> */}
         <Grid md={2} lg={2} xl={2} sx={styleGrid} item>
           <Stack justifyContent="center" alignItems="center">
             <Box component="img" src={Logo1} sx={{ width: 80 }} />
           </Stack>
         </Grid>
         <Grid md={8} lg={8} xl={8} sx={styleGrid} item>
-          <Typography fontFamily="Anton" fontSize="2.6rem">
+          <p className="text-4xl font-anton">
             Universidade do Estado de Mato Grosso
-          </Typography>
+          </p>
         </Grid>
         <Grid sx={styleGrid} md={2} lg={2} xl={2} item>
           <Box component="img" src={Logo2} sx={{ width: 80 }} />
         </Grid>
+        <Typography
+          variant="h1"
+          sx={{
+            position: "absolute",
+            top: 91,
+            left: 45,
+            fontFamily: "Mr Dafoe",
+            color: "#0833cd",
+            textShadow: "2px 2px #FFFFFF",
+          }}
+        >
+          Certificado
+        </Typography>
         <Grid md={0.5} lg={0.5} xl={0.5} item />
-
-        <Grid sx={{ mt: 8 }} md={11} lg={11} xl={11} item>
+        <Box
+          component="img"
+          src={Logo4}
+          sx={{
+            position: "absolute",
+            width: 300,
+            zIndex: 0,
+            right: 0,
+            bottom: 0,
+            opacity: 0.1,
+          }}
+        />
+        <Grid mt={8} md={11} lg={11} xl={11} item>
           <Stack
             sx={{
               borderRadius: "1px 140px",
               bgcolor: "rgba(255,255,255, 0.8)",
               color: "#000000",
+              zIndex: 2,
               padding: 5,
             }}
           >
@@ -290,7 +348,7 @@ export default function Certificado(props) {
             display: "flex",
             alignItems: "center",
             justifyContent: "end",
-            zIndex: 2,
+            zIndex: 1,
           }}
           item
         >
@@ -306,18 +364,6 @@ export default function Certificado(props) {
           </Stack>
         </Grid>
         <Grid md={0.5} lg={0.5} xl={0.5} item />
-        <Box
-          sx={{
-            position: "absolute",
-            width: 300,
-            zIndex: 0,
-            right: 110,
-            bottom: -330,
-            opacity: 0.1,
-          }}
-          component="img"
-          src={imageIcons}
-        />
       </Grid>
       {/* </Container> */}
 
@@ -330,12 +376,18 @@ export default function Certificado(props) {
         </Tooltip>
         <Tooltip arrow title="fazer download do certificado">
           <button
-            onClick={() => {
-              exportAsImage(exportRef.current, "test");
-            }}
-            className="transition rounded-md flex border-solid active:border-pink-400 border-2 text-pink-500 border-pink-500 hover:border-pink-700 flex-g p-2 items-center "
+            onClick={downloadImage}
+            className="w-[115px] transition rounded-md flex border-solid active:border-pink-400 border-2 text-pink-500 border-pink-500 hover:border-pink-700 flex-g p-2 items-center "
           >
-            <MdCloudDownload className="mr-2" />
+            {loading ? (
+              <>
+                <CircularProgress size={20} className="mr-2" />
+              </>
+            ) : (
+              <>
+                <MdCloudDownload className="mr-2" />
+              </>
+            )}
             <p className="">Download</p>
           </button>
         </Tooltip>
