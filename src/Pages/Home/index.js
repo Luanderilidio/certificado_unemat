@@ -14,6 +14,7 @@ import {
   FormControl,
   FormControlLabel,
   FormHelperText,
+  Grid,
   InputLabel,
   MenuItem,
   Radio,
@@ -133,27 +134,44 @@ export default function Home() {
   //   }
   // };
 
+  const styleGrid = {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  };
+
   return (
     <>
       <Header />
       <div className=" flex flex-col items-center justify-center w-full text-white">
         <h1 className="text-7xl font-anton">UNEMTECH</h1>
 
-        <h1 className="font-bold text-xl font-atala">
+        <h1 className="font-bold text-xl font-atala text-center">
           Create and share certificates dynamically using this tool
         </h1>
         <Container
           maxWidth="lg"
           className="mt-5 p-3 rounded-lg border-solid border-green-700 border-4"
         >
-          {/* <div className="mt-5 w-11/12 h-fit p-3 rounded-lg border-solid border-green-700 border-4 "> */}
-          <div className="flex flew-row justify-between items-center font-medium">
-            <div className="flex items-center">
+          <Grid container spacing={1}>
+            <Grid
+              item
+              sx={styleGrid}
+              xs={4}
+              sm={1.9}
+              md={1.5}
+              lg={1.2}
+              xl={1.4}
+            >
               <Tooltip arrow title="Quantas assinaturas o certificado precisa">
-                <FormControl>
+                <FormControl fullWidth>
                   <RadioGroup
                     value={qtdAssinatura}
-                    sx={{ alignItems: "center" }}
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
                     onChange={handleChange}
                     row
                   >
@@ -169,66 +187,78 @@ export default function Home() {
                     />
                   </RadioGroup>
                   <FormHelperText>
-                    <p className="font-medium text-white">Assinaturas</p>
+                    <p className="font-medium text-center text-white">
+                      Assinaturas
+                    </p>
                   </FormHelperText>
                 </FormControl>
               </Tooltip>
-
+            </Grid>
+            <Grid
+              item
+              sx={styleGrid}
+              xs={4}
+              sm={2.1}
+              md={1.6}
+              lg={1.3}
+              xl={1.3}
+            >
               <Tooltip arrow title="Colocar descricão no certificado">
                 <button
                   onClick={handleDescricaoClick}
-                  className="transition ease-in-out rounded-md flex border-solid border-2  text-white border-white hover:border-gray-400 active:border-gray-500 flex-g p-2 items-center mr-2"
+                  className="transition ease-in-out rounded-md flex border-solid border-2  text-white border-white hover:border-gray-400 active:border-gray-500 flex-g p-2 items-center "
                 >
                   <MdTextFields className="mr-2" />
                   <p className="">Descrição</p>
                 </button>
               </Tooltip>
+            </Grid>
+            <Grid
+              item
+              sx={styleGrid}
+              xs={3.5}
+              sm={1.9}
+              md={1.4}
+              lg={1.2}
+              xl={1.3}
+            >
               <Tooltip arrow title="Selecione o Campus">
                 <button
                   onClick={handleCampusClick}
-                  className="transition ease-in-out rounded-md flex border-solid border-2  text-white border-white hover:border-gray-400 active:border-gray-500 flex-g p-2 items-center mr-2"
+                  className="transition ease-in-out rounded-md flex border-solid border-2  text-white border-white hover:border-gray-400 active:border-gray-500 flex-g p-2 items-center "
                 >
                   <BiMapPin className="mr-2" />
                   <p className="">Campus</p>
                 </button>
               </Tooltip>
+            </Grid>
+            <Grid item sx={styleGrid} xs={3} sm={1.6} md={1.2} lg={1} xl={1}>
               <Tooltip arrow title="Selecione o curso do certificado">
                 <button
                   onClick={handleCursoClick}
-                  className="transition ease-in-out rounded-md flex border-solid border-2  text-white border-white hover:border-gray-400 active:border-gray-500 flex-g p-2 items-center mr-2"
+                  className="transition ease-in-out rounded-md flex border-solid border-2  text-white border-white hover:border-gray-400 active:border-gray-500 flex-g p-2 items-center "
                 >
                   <MdOutlineBook className="mr-2" />
                   <p className="">Curso</p>
                 </button>
               </Tooltip>
+            </Grid>
+            <Grid item sx={styleGrid} xs={7} sm={3} md={2.2} lg={1.9} xl={2}>
               <Tooltip arrow title="Descreva a banca avaliadora">
                 <button
                   onClick={() => {
                     handleBancaClick();
                     setViewBanca(true);
                   }}
-                  className="transition ease-in-out rounded-md flex border-solid border-2  text-white border-white hover:border-gray-400 active:border-gray-500 flex-g p-2 items-center mr-2"
+                  className="transition ease-in-out rounded-md flex border-solid border-2  text-white border-white hover:border-gray-400 active:border-gray-500 flex-g p-2 items-center "
                 >
                   <HiOutlineUserGroup className="mr-2" />
                   <p className="">Banca Avaliadora</p>
                 </button>
               </Tooltip>
-            </div>
-            {/* <div className="flex">
-              <Tooltip arrow title="compartilhar certificado nas redes sociais">
-                <button className="transition ease-in-out rounded-md flex border-solid border-2  text-purple-500 border-purple-500 hover:border-purple-700 active:border-purple-400 flex-g p-2 items-center mr-2">
-                  <BiShareAlt className="mr-2" />
-                  <p className="">Share</p>
-                </button>
-              </Tooltip>
-              <Tooltip arrow title="fazer download do certificado">
-                <button className="transition rounded-md flex border-solid active:border-pink-400 border-2 text-pink-500 border-pink-500 hover:border-pink-700 flex-g p-2 items-center ">
-                  <MdCloudDownload className="mr-2" />
-                  <p className="">Download</p>
-                </button>
-              </Tooltip>
-            </div> */}
-          </div>
+            </Grid>
+            <Grid item xs={2} sm={1.5} md={4.1} lg={5.4} xl={5} />
+          </Grid>
           <div className="p-2">
             <Certificado
               textDescricao={descricao}
