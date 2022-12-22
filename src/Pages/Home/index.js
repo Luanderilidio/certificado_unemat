@@ -147,7 +147,7 @@ export default function Home() {
         <h1 className="text-7xl font-anton">UNEMTECH</h1>
 
         <h1 className="font-bold text-xl font-atala text-center">
-          Create and share certificates dynamically using this tool
+          Create and share certificates dynamically using this tool!
         </h1>
         <Container
           maxWidth="lg"
