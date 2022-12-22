@@ -60,9 +60,19 @@ export default function Certificado(props) {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down("md"));
 
+  const styleModal = {
+    "& .MuiBackdrop-root": {
+      background: "rgba(0, 0, 0, 0.7)",
+      // borderRadius: "16px",
+      boxShadow: "0 4px 30px rgba(0, 0, 0, 0.1)",
+      backdropFilter: "blur(30px)",
+    },
+  };
+
   return (
     <>
       <Dialog
+        sx={matches ? styleModal : null}
         open={matches}
         TransitionComponent={Transition}
         keepMounted
